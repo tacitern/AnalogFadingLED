@@ -3,8 +3,9 @@ import matplotlib.pyplot as plt
 
 def intV1transistions():
     """
-
-    :return:
+    Runs through integer value combinations for R1, R2, and R3 from 1 to 100.
+    Prints combination which gives largest transistion width for V1 low to V1 high.
+    These values can be used as a proportion of R1, R2, and R3 to each other
     """
 
     R1 = range(1, 100 + 1)

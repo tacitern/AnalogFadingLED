@@ -1,4 +1,4 @@
-905073392735151
+905324064486365
 10118194-0001LF
 AMPHENOL_10118194-0001LF
 
@@ -51883,27 +51883,6 @@ SolderWirePad_single_SMD_5x10mm
 0
 0
 0
-audio
-BNC STRAIGHT LOW PROFILE PCB SOCKET
-
-
-0
-5
-2
-audio
-HORIZONTAL_STEREO_JACK
-
-
-0
-5
-5
-audio
-PHONE_JACK_INSULATED_BUSHING
-
-
-0
-5
-5
 digikey-footprints
 3-SIP_Module_TM1000Q
 
@@ -55152,3 +55131,24 @@ Zigbee_Module_MRF24J40MD
 0
 12
 12
+logo
+Tern_logo
+
+
+0
+0
+0
+logo
+tern_lines
+
+
+0
+0
+0
+logo
+tern_outline
+
+
+0
+0
+0

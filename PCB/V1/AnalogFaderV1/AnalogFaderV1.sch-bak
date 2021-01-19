@@ -404,46 +404,11 @@ Wire Wire Line
 	3700 3100 3700 2850
 Wire Wire Line
 	3700 2850 3850 2850
-$Comp
-L LED:QLS6B-FKW D1
-U 1 1 60046B54
-P 2400 2750
-F 0 "D1" H 2400 3117 50  0000 C CNN
-F 1 "QLS6B-FKW" H 2400 3026 50  0000 C CNN
-F 2 "digikey-footprints:6-PLCC_3.5x3.5mm" H 2200 2430 50  0001 L CNN
-F 3 "https://www.cree.com/led-components/media/documents/1397-QLS6BFKW.pdf" H 2200 2350 50  0001 L CNN
-	1    2400 2750
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	2000 2750 2050 2750
-Wire Wire Line
-	2100 2650 2050 2650
-Wire Wire Line
-	2050 2650 2050 2750
 Connection ~ 2050 2750
 Wire Wire Line
-	2050 2750 2100 2750
-Wire Wire Line
-	2100 2850 2050 2850
-Wire Wire Line
-	2050 2850 2050 2750
-Wire Wire Line
-	2700 2750 3350 2750
-Wire Wire Line
-	2700 2650 2850 2650
-Wire Wire Line
-	2850 2400 2850 2650
-Wire Wire Line
-	2700 2850 2850 2850
-Wire Wire Line
-	2850 2850 2850 3100
-Wire Wire Line
-	2850 2400 2950 2400
-Wire Wire Line
 	3250 2400 3350 2400
-Wire Wire Line
-	2850 3100 3350 3100
 $Comp
 L Device:Polyfuse_Small F1
 U 1 1 60059808
@@ -469,4 +434,48 @@ Wire Wire Line
 	6500 2750 6500 2850
 Wire Wire Line
 	5600 2400 6500 2400
+$Comp
+L dk_LED-Indication-Discrete:ASMB-TTB0-0A3A2 D1
+U 1 1 60051AA2
+P 2450 2550
+F 0 "D1" H 2400 2731 60  0000 C CNN
+F 1 "CLX6F-FKC" H 2450 2000 60  0001 C CNN
+F 2 "digikey-footprints:6-PLCC_3.5x3.5mm" H 2650 2750 60  0001 L CNN
+F 3 "https://www.cree.com/led-components/media/documents/ds-CLX6F-FKC-1352.pdf" H 2650 2850 60  0001 L CNN
+F 4 "CLX6F-FKC-CKNNQDGBB7A363TR-ND" H 2650 2950 60  0001 L CNN "Digi-Key_PN"
+F 5 "CLX6F-FKC-CKNNQDGBB7A363" H 2650 3050 60  0001 L CNN "MPN"
+F 6 "Optoelectronics" H 2650 3150 60  0001 L CNN "Category"
+F 7 "LED Indication - Discrete" H 2650 3250 60  0001 L CNN "Family"
+F 8 "" H 2650 3350 60  0001 L CNN "DK_Datasheet_Link"
+F 9 "" H 2650 3450 60  0001 L CNN "DK_Detail_Page"
+F 10 "LED RGB DIFFUSED 6PLCC SMD" H 2650 3550 60  0001 L CNN "Description"
+F 11 "Cree Inc." H 2650 3650 60  0001 L CNN "Manufacturer"
+F 12 "Active" H 2650 3750 60  0001 L CNN "Status"
+	1    2450 2550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2050 2550 2150 2550
+Wire Wire Line
+	2050 2550 2050 2750
+Wire Wire Line
+	2050 2950 2150 2950
+Wire Wire Line
+	2050 2750 2050 2950
+Wire Wire Line
+	2050 2750 2150 2750
+Wire Wire Line
+	2650 2750 3350 2750
+Wire Wire Line
+	2650 2550 2700 2550
+Wire Wire Line
+	2650 2950 2700 2950
+Wire Wire Line
+	2700 2550 2700 2400
+Wire Wire Line
+	2700 2400 2950 2400
+Wire Wire Line
+	2700 2950 2700 3100
+Wire Wire Line
+	2700 3100 3350 3100
 $EndSCHEMATC
