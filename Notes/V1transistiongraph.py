@@ -47,5 +47,27 @@ def intV1transistions():
     print(f'R : {R_proportions_max_diff}')
 
 
+def graphdifferenceR1R2equal():
+    data = []
+    x = []
+    for i in range(5000):
+        z = 1/100 * i
+        data.append(1/(2*z+1))
+        x.append(z)
+
+    plt.plot(x, data)
+    plt.show()
+
+def graphdifferenceR1R3equal():
+    data = []
+    x = []
+    for i in range(5000):
+        z = 1/100 * i
+        data.append(z/(2*z+1))
+        x.append(z)
+
+    plt.plot(x, data)
+    plt.show()
+
 if __name__ == '__main__':
-    intV1transistions()
+    graphdifferenceR1R3equal()
