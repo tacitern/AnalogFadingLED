@@ -6,5 +6,5 @@ The primary propuse of this repositor is to explore analog circuit designs which
 
 
 ## TODO/In Progress
-- [Analog Fader LED]<https://github.com/tacitern/HysteresisOscillator/tree/writeup/Projects/AnalogFadingLED>
+- [Analog Fader LED](https://github.com/tacitern/HysteresisOscillator/tree/writeup/Projects/AnalogFadingLED)
 - PWM Simple Motor Speed Control
