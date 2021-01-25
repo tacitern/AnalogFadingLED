@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def intV1transistions():
@@ -69,5 +70,76 @@ def graphdifferenceR1R3equal():
     plt.plot(x, data)
     plt.show()
 
+def graphVcapexample1():
+    Vcc = 10
+    R = 10e3
+    C = 10e-6
+
+    t = []
+    v = []
+    N = 0
+    for i in range(470):
+        t.append(i*0.001)
+        if t[-1] < 0.029 + 0.11 + 0.11:
+            N = 0
+        else:
+            N = np.floor((t[-1] - 0.029)/(0.11 + 0.11))
+
+        # print(f'{t}\t{N}')
+
+        if t[-1] < 0.029:
+            v.append(Vcc - Vcc*np.exp(-t[-1]/(R*C)))
+        elif t[-1] >= 0.029 + 0.11*2*N and t[-1] < 0.029 + 0.11*(2*N+1):
+            v.append(Vcc - 0.75*Vcc*np.exp(-(t[-1] - (0.029 + 0.11*2*N))/(R*C)))
+        elif t[-1] >= 0.029 + 0.11*(2*N+1) and 0.029 + 0.11*(2*N+2):
+            v.append(0.75*Vcc*np.exp(-(t[-1] - (0.029 + 0.11*(2*N+1)))/(R*C)))
+
+    plt.plot(t, v)
+    plt.show()
+
+def graphHysteresisResistorsR1R2EqualDutyCycle():
+    Vcc = 10
+    R = 10e3
+    C = 10e-6
+
+    v_thres_high = 0.75 * Vcc
+    v_thres_low = 0.50 * Vcc
+
+    t_init = -R*C*np.log((v_thres_low - Vcc)/(0 - Vcc))
+    t_charge = -R*C*np.log((v_thres_high - Vcc)/(v_thres_low - Vcc))
+    t_discharge = -R*C*np.log((v_thres_low)/(v_thres_high))
+
+    t = []
+    v = []
+    N = 0
+    vout = []
+    for i in range(800):
+        t.append(i * 0.001)
+        if t[-1] < t_init + t_charge + t_discharge:
+            N = 0
+        else:
+            N = np.floor((t[-1] - t_init) / (t_charge + t_discharge))
+
+        # print(f'{t}\t{N}')
+
+        if t[-1] < t_init:
+            vout.append(Vcc)
+            v.append(Vcc - Vcc * np.exp(-t[-1] / (R * C)))
+        elif t[-1] >= t_init + t_charge * 2 * N and t[-1] < t_init + t_charge * (2 * N + 1):
+            vout.append(Vcc)
+            v.append(Vcc + (v_thres_low - Vcc) * np.exp(-(t[-1] - (t_init + t_charge * 2 * N)) / (R * C)))
+        elif t[-1] >= t_init + t_discharge * (2 * N + 1) and t_init + t_discharge * (2 * N + 2):
+            vout.append(0)
+            v.append(v_thres_high * np.exp(-(t[-1] - (t_init + t_discharge * (2 * N + 1))) / (R * C)))
+
+    print(t_init)
+    print(t_charge)
+    print(t_discharge)
+
+    plt.plot(v)
+    plt.plot(vout)
+    plt.legend(['Vcap', 'Vop'])
+    plt.show()
+
 if __name__ == '__main__':
-    graphdifferenceR1R3equal()
+    graphHysteresisResistorsR1R2EqualDutyCycle()
