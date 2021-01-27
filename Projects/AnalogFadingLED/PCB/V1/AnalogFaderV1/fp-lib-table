@@ -1,0 +1,5 @@
+(fp_lib_table
+  (lib (name 10118194-0001LF)(type KiCad)(uri ${KIPRJMOD}/footprints/10118194-0001LF)(options "")(descr ""))
+  (lib (name AnalogFaderV1)(type KiCad)(uri ${KIPRJMOD}/footprints/AnalogFaderV1.pretty)(options "")(descr ""))
+  (lib (name logo)(type KiCad)(uri ${KIPRJMOD}/footprints/logo)(options "")(descr ""))
+)
