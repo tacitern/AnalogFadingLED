@@ -70,76 +70,67 @@ def graphdifferenceR1R3equal():
     plt.plot(x, data)
     plt.show()
 
-def graphVcapexample1():
-    Vcc = 10
-    R = 10e3
-    C = 10e-6
 
-    t = []
+def graphVcapGeneral(R, C, Vcc, v_thres_high, v_thres_low, t_stop=1, t_inc=0.001, Vop_output=False):
+    """
+    This Function uses the piecewise function defind in the hysteresis oscillator document on the RC section
+    of the hysteresis oscillator
+    :param R: Resistance used in the RC section
+    :param C: Capacitance used in the RC section
+    :param Vcc: Supple voltage desired
+    :param v_thres_high: this is actually Vthreshigh/Vcc; percentage of Vcc for high threshold voltage
+    :param v_thres_low: this is actually Vthreslow/Vcc; percentage of Vcc for low threshold voltage
+    :param t_stop: stop time in seconds
+    :param t_inc: time increment
+    :return:
+    """
+
+    t_i = -R*C*np.log(1-v_thres_low)
+    t_c = -R*C*np.log((v_thres_high - 1)/(v_thres_low - 1))
+    t_d = -R*C*np.log((v_thres_low)/(v_thres_high))
+
+    t = [0]
     v = []
     N = 0
-    for i in range(470):
-        t.append(i*0.001)
-        if t[-1] < 0.029 + 0.11 + 0.11:
+    if Vop_output:
+        vout = []
+    i = 0
+    while t[-1] < t_stop:
+
+        if t[-1] < t_i + t_c + t_d:
             N = 0
         else:
-            N = np.floor((t[-1] - 0.029)/(0.11 + 0.11))
+            N = np.floor((t[-1] - t_i) / (t_c + t_d))
 
         # print(f'{t}\t{N}')
 
-        if t[-1] < 0.029:
-            v.append(Vcc - Vcc*np.exp(-t[-1]/(R*C)))
-        elif t[-1] >= 0.029 + 0.11*2*N and t[-1] < 0.029 + 0.11*(2*N+1):
-            v.append(Vcc - 0.75*Vcc*np.exp(-(t[-1] - (0.029 + 0.11*2*N))/(R*C)))
-        elif t[-1] >= 0.029 + 0.11*(2*N+1) and 0.029 + 0.11*(2*N+2):
-            v.append(0.75*Vcc*np.exp(-(t[-1] - (0.029 + 0.11*(2*N+1)))/(R*C)))
-
-    plt.plot(t, v)
-    plt.show()
-
-def graphHysteresisResistorsR1R2EqualDutyCycle():
-    Vcc = 10
-    R = 10e3
-    C = 10e-6
-
-    v_thres_high = 0.75 * Vcc
-    v_thres_low = 0.50 * Vcc
-
-    t_init = -R*C*np.log((v_thres_low - Vcc)/(0 - Vcc))
-    t_charge = -R*C*np.log((v_thres_high - Vcc)/(v_thres_low - Vcc))
-    t_discharge = -R*C*np.log((v_thres_low)/(v_thres_high))
-
-    t = []
-    v = []
-    N = 0
-    vout = []
-    for i in range(800):
-        t.append(i * 0.001)
-        if t[-1] < t_init + t_charge + t_discharge:
-            N = 0
-        else:
-            N = np.floor((t[-1] - t_init) / (t_charge + t_discharge))
-
-        # print(f'{t}\t{N}')
-
-        if t[-1] < t_init:
-            vout.append(Vcc)
+        if t[-1] < t_i:
+            if Vop_output:
+                vout.append(Vcc)
             v.append(Vcc - Vcc * np.exp(-t[-1] / (R * C)))
-        elif t[-1] >= t_init + t_charge * 2 * N and t[-1] < t_init + t_charge * (2 * N + 1):
-            vout.append(Vcc)
-            v.append(Vcc + (v_thres_low - Vcc) * np.exp(-(t[-1] - (t_init + t_charge * 2 * N)) / (R * C)))
-        elif t[-1] >= t_init + t_discharge * (2 * N + 1) and t_init + t_discharge * (2 * N + 2):
-            vout.append(0)
-            v.append(v_thres_high * np.exp(-(t[-1] - (t_init + t_discharge * (2 * N + 1))) / (R * C)))
+        elif t[-1] >= t_i + (t_c + t_d) * N and t[-1] < t_i + t_c*(N + 1) + t_d*N:
+            if Vop_output:
+                vout.append(Vcc)
+            v.append(Vcc + (v_thres_low*Vcc - Vcc) * np.exp(-(t[-1] - (t_i + (t_c + t_d) * N)) / (R * C)))
+        elif t[-1] >= t_i + t_c*(N + 1) + t_d*N and t_i + (t_c + t_d) * (N + 1):
+            if Vop_output:
+                vout.append(0)
+            v.append(v_thres_high * Vcc * np.exp(-(t[-1] - (t_i + t_c*(N + 1) + t_d*N)) / (R * C)))
 
-    print(t_init)
-    print(t_charge)
-    print(t_discharge)
+        i = i + 1
+        t.append(i * t_inc)
 
-    plt.plot(v)
-    plt.plot(vout)
-    plt.legend(['Vcap', 'Vop'])
+    print(t_i)
+    print(t_c)
+    print(t_d)
+
+    plt.plot(t[:-1], v)
+    if Vop_output:
+        plt.plot(t[:-1], vout)
+        plt.legend(['Vcap', 'Vop'])
+    else:
+        plt.legend(['Vcap'])
     plt.show()
 
 if __name__ == '__main__':
-    graphHysteresisResistorsR1R2EqualDutyCycle()
+    graphVcapGeneral(10e3, 10e-6, 10, 0.75, 0.25, 0.69)
