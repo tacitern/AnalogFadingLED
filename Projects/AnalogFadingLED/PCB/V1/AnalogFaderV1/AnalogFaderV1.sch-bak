@@ -371,9 +371,7 @@ F 3 "~" H 3100 2400 50  0001 C CNN
 	1    3100 2400
 	-1   0    0    1   
 $EndComp
-Text Notes 2900 3300 0    50   ~ 0
-Optional
-Text Notes 2200 2050 0    50   ~ 0
+Text Notes 2150 1700 0    50   ~ 0
 D4 is a diode used to balance the forward voltage of the Red LED (2.1V) \nwith the Blue (3V) and Green (2.7V). The added diode would have a \nforward voltage drop of 0.7V causing the Red LED to turn on around \nthe same time as the Green, and Blue LED
 Connection ~ 2000 2750
 Wire Wire Line
@@ -408,7 +406,7 @@ Wire Wire Line
 	2000 2750 2050 2750
 Connection ~ 2050 2750
 Wire Wire Line
-	3250 2400 3350 2400
+	3250 2400 3300 2400
 $Comp
 L Device:Polyfuse_Small F1
 U 1 1 60059808
@@ -473,9 +471,36 @@ Wire Wire Line
 Wire Wire Line
 	2700 2550 2700 2400
 Wire Wire Line
-	2700 2400 2950 2400
+	2700 2400 2900 2400
 Wire Wire Line
 	2700 2950 2700 3100
 Wire Wire Line
 	2700 3100 3350 3100
+Text Notes 2950 2250 0    50   ~ 0
+Optional
+$Comp
+L Device:R_Small_US R8
+U 1 1 600BABD1
+P 3100 2100
+F 0 "R8" V 2895 2100 50  0000 C CNN
+F 1 "0" V 2986 2100 50  0000 C CNN
+F 2 "" H 3100 2100 50  0001 C CNN
+F 3 "~" H 3100 2100 50  0001 C CNN
+	1    3100 2100
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3200 2100 3300 2100
+Wire Wire Line
+	3300 2100 3300 2400
+Connection ~ 3300 2400
+Wire Wire Line
+	3300 2400 3350 2400
+Wire Wire Line
+	3000 2100 2900 2100
+Wire Wire Line
+	2900 2100 2900 2400
+Connection ~ 2900 2400
+Wire Wire Line
+	2900 2400 2950 2400
 $EndSCHEMATC

@@ -1,4 +1,4 @@
-905324064486365
+903786590766174
 10118194-0001LF
 AMPHENOL_10118194-0001LF
 
@@ -30141,6 +30141,13 @@ LED_miniPLCC_2315_Handsoldering
 0
 0
 0
+LMV358_sot_23_8
+SOT_23_8_LMV358
+
+
+0
+8
+8
 Labels
 Blank
 
@@ -55133,20 +55140,6 @@ Zigbee_Module_MRF24J40MD
 12
 logo
 Tern_logo
-
-
-0
-0
-0
-logo
-tern_lines
-
-
-0
-0
-0
-logo
-tern_outline
 
 
 0

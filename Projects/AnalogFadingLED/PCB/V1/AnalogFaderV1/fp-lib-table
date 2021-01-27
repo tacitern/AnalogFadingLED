@@ -2,4 +2,5 @@
   (lib (name 10118194-0001LF)(type KiCad)(uri ${KIPRJMOD}/footprints/10118194-0001LF)(options "")(descr ""))
   (lib (name AnalogFaderV1)(type KiCad)(uri ${KIPRJMOD}/footprints/AnalogFaderV1.pretty)(options "")(descr ""))
   (lib (name logo)(type KiCad)(uri ${KIPRJMOD}/footprints/logo)(options "")(descr ""))
+  (lib (name LMV358_sot_23_8)(type KiCad)(uri ${KIPRJMOD}/footprints/LMV358_sot_23_8)(options "")(descr ""))
 )
