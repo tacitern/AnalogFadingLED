@@ -59,6 +59,7 @@ def graphdifferenceR1R2equal():
     plt.plot(x, data)
     plt.show()
 
+
 def graphdifferenceR1R3equal():
     data = []
     x = []
@@ -71,7 +72,43 @@ def graphdifferenceR1R3equal():
     plt.show()
 
 
-def graphVcapGeneral(R, C, Vcc, v_thres_high, v_thres_low, t_stop=1, t_inc=0.001, Vop_output=False):
+def graphdifferenceR1R2equallntimingvalues():
+    data = []
+    x = []
+    for i in range(5000):
+        z = 1 / 1000 * i
+        data.append(np.log(z/(z+1)))
+        x.append(z)
+
+    plt.plot(x, data)
+    plt.show()
+
+
+def graphdifferenceR1R3equallntimingvalues():
+    data = []
+    x = []
+    for i in range(5000):
+        z = 1 / 100 * i
+        data.append(np.log(1/(z+1)))
+        x.append(z)
+
+    plt.plot(x, data)
+    plt.show()
+
+
+def graphdifferenceR1R3equaldutycycle():
+    data = []
+    x = []
+    for i in range(5000):
+        z = 1 / 100 * i
+        data.append(1 / (1 + np.log(2)/np.log(z+1)))
+        x.append(z)
+
+    plt.plot(x, data)
+    plt.show()
+
+
+def graphVcapGeneral(R, C, Vcc, v_thres_high, v_thres_low, t_stop=1, t_start=0, t_inc=0.001, Vop_output=False):
     """
     This Function uses the piecewise function defind in the hysteresis oscillator document on the RC section
     of the hysteresis oscillator
@@ -81,7 +118,9 @@ def graphVcapGeneral(R, C, Vcc, v_thres_high, v_thres_low, t_stop=1, t_inc=0.001
     :param v_thres_high: this is actually Vthreshigh/Vcc; percentage of Vcc for high threshold voltage
     :param v_thres_low: this is actually Vthreslow/Vcc; percentage of Vcc for low threshold voltage
     :param t_stop: stop time in seconds
+    :param t_start: start time to begin graphing Vcap
     :param t_inc: time increment
+    :param Vop_output: If true a simulated output voltage, Vop, is added to Vcap graph
     :return:
     """
 
@@ -89,7 +128,7 @@ def graphVcapGeneral(R, C, Vcc, v_thres_high, v_thres_low, t_stop=1, t_inc=0.001
     t_c = -R*C*np.log((v_thres_high - 1)/(v_thres_low - 1))
     t_d = -R*C*np.log((v_thres_low)/(v_thres_high))
 
-    t = [0]
+    t = [t_start]
     v = []
     N = 0
     if Vop_output:
@@ -118,7 +157,7 @@ def graphVcapGeneral(R, C, Vcc, v_thres_high, v_thres_low, t_stop=1, t_inc=0.001
             v.append(v_thres_high * Vcc * np.exp(-(t[-1] - (t_i + t_c*(N + 1) + t_d*N)) / (R * C)))
 
         i = i + 1
-        t.append(i * t_inc)
+        t.append(t_start + i * t_inc)
 
     print(t_i)
     print(t_c)
@@ -133,4 +172,5 @@ def graphVcapGeneral(R, C, Vcc, v_thres_high, v_thres_low, t_stop=1, t_inc=0.001
     plt.show()
 
 if __name__ == '__main__':
-    graphVcapGeneral(10e3, 10e-6, 10, 0.75, 0.25, 0.69)
+    # graphVcapGeneral(10e3, 10e-6, 10, 3/4, 1/4, 0.69, t_start=0.139, Vop_output=True)
+    graphdifferenceR1R3equaldutycycle()
